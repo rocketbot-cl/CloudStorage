@@ -9,6 +9,8 @@ Module to upload files to Google Cloud Storage
 
 ![alt text](https://i.imgur.com/ZTHiDk0.png)
 
+### Update
+- 09-03-2021: Add timeout.
 
 <h2>License</h2>
 
