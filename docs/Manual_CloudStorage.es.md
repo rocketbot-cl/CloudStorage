@@ -21,6 +21,7 @@ Para instalar el módulo en Rocketbot Studio, se puede hacer de dos formas:
 Antes de usar este módulo, debe tener una cuenta de Gmail para acceder a Google Cloud:
 
 1. **Acceda al portal de Google Cloud**
+- Ve a https://console.cloud.google.com/
 - Inicie sesión en la consola de Google Cloud.
 - Si es la primera vez que accede, se le solicitará que acepte los términos y condiciones.
 

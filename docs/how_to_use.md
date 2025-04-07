@@ -3,6 +3,7 @@
 Before using this module, you must have a Gmail account to access Google Cloud:
 
 1. **Access the Google Cloud portal**
+- Go to https://console.cloud.google.com/
 - Log in to the Google Cloud Console.
 - If this is your first time, you will be asked to accept the terms and conditions.
 
@@ -41,6 +42,7 @@ Before using this module, you must have a Gmail account to access Google Cloud:
 Antes de usar este módulo, debe tener una cuenta de Gmail para acceder a Google Cloud:
 
 1. **Acceda al portal de Google Cloud**
+- Ve a https://console.cloud.google.com/
 - Inicie sesión en la consola de Google Cloud.
 - Si es la primera vez que accede, se le solicitará que acepte los términos y condiciones.
 
@@ -80,6 +82,7 @@ Antes de usar este módulo, debe tener una cuenta de Gmail para acceder a Google
 Antes de usar este módulo, você precisa ter uma conta do Gmail para acessar o Google Cloud:
 
 1. **Acesse o portal do Google Cloud**
+- Acesse https://console.cloud.google.com/
 - Faça login no Google Cloud Console.
 - Se for a primeira vez, você será solicitado a aceitar os termos e condições.
 

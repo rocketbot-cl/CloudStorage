@@ -20,6 +20,7 @@ To install the module in Rocketbot Studio, it can be done in two ways:
 Before using this module, you must have a Gmail account to access Google Cloud:
 
 1. **Access the Google Cloud portal**
+- Go to https://console.cloud.google.com/
 - Log in to the Google Cloud Console.
 - If this is your first time, you will be asked to accept the terms and conditions.
 
@@ -41,8 +42,7 @@ Before using this module, you must have a Gmail account to access Google Cloud:
 - Click "Create service account."
 - Specify a name and description for the service account.
 - Assign the required role:
-- Under "Select a role," search for "Storage 
-Admin."
+- Under "Select a role," search for "Storage Admin."
 - Storage Admin.
 - This role grants permissions to manage Cloud Storage files and settings.
 - Continue and click "Create."

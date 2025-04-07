@@ -7,6 +7,7 @@
 Esse módulo permite fazer upload de arquivos para o CloudStorage.  
 
 *Read this in other languages: [English](Manual_CloudStorage.md), [Português](Manual_CloudStorage.pr.md), [Español](Manual_CloudStorage.es.md)*
+  
 ![banner](imgs\Banner_CloudStorage.png)
 ## Como instalar este módulo
   
@@ -21,6 +22,7 @@ Para instalar o módulo no Rocketbot Studio, pode ser feito de duas formas:
 Antes de usar este módulo, você precisa ter uma conta do Gmail para acessar o Google Cloud:
 
 1. **Acesse o portal do Google Cloud**
+- Acesse https://console.cloud.google.com/
 - Faça login no Google Cloud Console.
 - Se for a primeira vez, você será solicitado a aceitar os termos e condições.
 
@@ -42,7 +44,6 @@ Antes de usar este módulo, você precisa ter uma conta do Gmail para acessar o 
 - Clique em "Criar conta de serviço".
 - Especifique um nome e uma descrição para a conta de serviço.
 - Atribua a função necessária:
-
 - Em "Selecionar uma função", pesquise por "Administrador de armazenamento".
 - Administrador de armazenamento.
 - Esta função concede permissões para gerenciar arquivos e configurações do Cloud Storage.
