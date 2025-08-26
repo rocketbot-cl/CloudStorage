@@ -30,8 +30,8 @@ from six.moves import http_client
 
 import google.auth
 import google.auth.transport.requests
-from google.protobuf import duration_pb2
-from google.protobuf import timestamp_pb2
+from google.r_protobuf import duration_pb2
+from google.r_protobuf import timestamp_pb2
 
 try:
     import grpc
@@ -390,12 +390,12 @@ def _bytes_to_unicode(value):
 
 
 def _from_any_pb(pb_type, any_pb):
-    """Converts an Any protobuf to the specified message type
+    """Converts an Any r_protobuf to the specified message type
 
     Args:
         pb_type (type): the type of the message that any_pb stores an instance
             of.
-        any_pb (google.protobuf.any_pb2.Any): the object to be converted.
+        any_pb (google.r_protobuf.any_pb2.Any): the object to be converted.
 
     Returns:
         pb_type: An instance of the pb_type message.
@@ -415,13 +415,13 @@ def _from_any_pb(pb_type, any_pb):
 
 
 def _pb_timestamp_to_datetime(timestamp_pb):
-    """Convert a Timestamp protobuf to a datetime object.
+    """Convert a Timestamp r_protobuf to a datetime object.
 
-    :type timestamp_pb: :class:`google.protobuf.timestamp_pb2.Timestamp`
-    :param timestamp_pb: A Google returned timestamp protobuf.
+    :type timestamp_pb: :class:`google.r_protobuf.timestamp_pb2.Timestamp`
+    :param timestamp_pb: A Google returned timestamp r_protobuf.
 
     :rtype: :class:`datetime.datetime`
-    :returns: A UTC datetime object converted from a protobuf timestamp.
+    :returns: A UTC datetime object converted from a r_protobuf timestamp.
     """
     return _EPOCH + datetime.timedelta(
         seconds=timestamp_pb.seconds, microseconds=(timestamp_pb.nanos / 1000.0)
@@ -429,10 +429,10 @@ def _pb_timestamp_to_datetime(timestamp_pb):
 
 
 def _pb_timestamp_to_rfc3339(timestamp_pb):
-    """Convert a Timestamp protobuf to an RFC 3339 string.
+    """Convert a Timestamp r_protobuf to an RFC 3339 string.
 
-    :type timestamp_pb: :class:`google.protobuf.timestamp_pb2.Timestamp`
-    :param timestamp_pb: A Google returned timestamp protobuf.
+    :type timestamp_pb: :class:`google.r_protobuf.timestamp_pb2.Timestamp`
+    :param timestamp_pb: A Google returned timestamp r_protobuf.
 
     :rtype: str
     :returns: An RFC 3339 formatted timestamp string.
@@ -442,13 +442,13 @@ def _pb_timestamp_to_rfc3339(timestamp_pb):
 
 
 def _datetime_to_pb_timestamp(when):
-    """Convert a datetime object to a Timestamp protobuf.
+    """Convert a datetime object to a Timestamp r_protobuf.
 
     :type when: :class:`datetime.datetime`
     :param when: the datetime to convert
 
-    :rtype: :class:`google.protobuf.timestamp_pb2.Timestamp`
-    :returns: A timestamp protobuf corresponding to the object.
+    :rtype: :class:`google.r_protobuf.timestamp_pb2.Timestamp`
+    :returns: A timestamp r_protobuf corresponding to the object.
     """
     ms_value = _microseconds_from_datetime(when)
     seconds, micros = divmod(ms_value, 10 ** 6)
@@ -457,17 +457,17 @@ def _datetime_to_pb_timestamp(when):
 
 
 def _timedelta_to_duration_pb(timedelta_val):
-    """Convert a Python timedelta object to a duration protobuf.
+    """Convert a Python timedelta object to a duration r_protobuf.
 
     .. note::
 
         The Python timedelta has a granularity of microseconds while
-        the protobuf duration type has a duration of nanoseconds.
+        the r_protobuf duration type has a duration of nanoseconds.
 
     :type timedelta_val: :class:`datetime.timedelta`
     :param timedelta_val: A timedelta object.
 
-    :rtype: :class:`google.protobuf.duration_pb2.Duration`
+    :rtype: :class:`google.r_protobuf.duration_pb2.Duration`
     :returns: A duration object equivalent to the time delta.
     """
     duration_pb = duration_pb2.Duration()
@@ -476,15 +476,15 @@ def _timedelta_to_duration_pb(timedelta_val):
 
 
 def _duration_pb_to_timedelta(duration_pb):
-    """Convert a duration protobuf to a Python timedelta object.
+    """Convert a duration r_protobuf to a Python timedelta object.
 
     .. note::
 
         The Python timedelta has a granularity of microseconds while
-        the protobuf duration type has a duration of nanoseconds.
+        the r_protobuf duration type has a duration of nanoseconds.
 
-    :type duration_pb: :class:`google.protobuf.duration_pb2.Duration`
-    :param duration_pb: A protobuf duration object.
+    :type duration_pb: :class:`google.r_protobuf.duration_pb2.Duration`
+    :param duration_pb: A r_protobuf duration object.
 
     :rtype: :class:`datetime.timedelta`
     :returns: The converted timedelta object.

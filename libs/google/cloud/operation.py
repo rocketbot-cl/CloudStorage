@@ -15,7 +15,7 @@
 """Wrap long-running operations returned from Google Cloud APIs."""
 
 from google.longrunning import operations_pb2
-from google.protobuf import json_format
+from google.r_protobuf import json_format
 
 
 _GOOGLE_APIS_PREFIX = "type.googleapis.com"
@@ -61,7 +61,7 @@ def register_type(klass, type_url=None):
 
 
 def _from_any(any_pb):
-    """Convert an ``Any`` protobuf into the actual class.
+    """Convert an ``Any`` r_protobuf into the actual class.
 
     Uses the type URL to do the conversion.
 
@@ -69,7 +69,7 @@ def _from_any(any_pb):
 
         This assumes that the type URL is already registered.
 
-    :type any_pb: :class:`google.protobuf.any_pb2.Any`
+    :type any_pb: :class:`google.r_protobuf.any_pb2.Any`
     :param any_pb: An any object to be converted.
 
     :rtype: object
@@ -83,7 +83,7 @@ def _from_any(any_pb):
 class Operation(object):
     """Representation of a Google API Long-Running Operation.
 
-    .. _protobuf: https://github.com/googleapis/googleapis/blob/\
+    .. _r_protobuf: https://github.com/googleapis/googleapis/blob/\
                   050400df0fdb16f63b63e9dee53819044bffc857/\
                   google/longrunning/operations.proto#L80
     .. _service: https://github.com/googleapis/googleapis/blob/\
@@ -92,7 +92,7 @@ class Operation(object):
     .. _JSON: https://cloud.google.com/speech/reference/rest/\
               v1beta1/operations#Operation
 
-    This wraps an operation `protobuf`_ object and attempts to
+    This wraps an operation `r_protobuf`_ object and attempts to
     interact with the long-running operations `service`_ (specific
     to a given API). (Some services also offer a `JSON`_
     API that maps the same underlying data type.)
@@ -104,7 +104,7 @@ class Operation(object):
     :param client: The client used to poll for the status of the operation.
                    If the operation was created via JSON/HTTP, the client
                    must own a :class:`~google.cloud._http.Connection`
-                   to send polling requests. If created via protobuf, the
+                   to send polling requests. If created via r_protobuf, the
                    client must have a gRPC stub in the ``_operations_stub``
                    attribute.
 
@@ -128,7 +128,7 @@ class Operation(object):
     """
 
     metadata = None
-    """Metadata about the current operation (as a protobuf).
+    """Metadata about the current operation (as a r_protobuf).
 
     Code that uses operations must register the metadata types (via
     :func:`register_type`) to ensure that the metadata fields can be
@@ -145,11 +145,11 @@ class Operation(object):
 
     @classmethod
     def from_pb(cls, operation_pb, client, **caller_metadata):
-        """Factory:  construct an instance from a protobuf.
+        """Factory:  construct an instance from a r_protobuf.
 
         :type operation_pb:
             :class:`~google.longrunning.operations_pb2.Operation`
-        :param operation_pb: Protobuf to be parsed.
+        :param operation_pb: r_protobuf to be parsed.
 
         :type client: object: must provide ``_operations_stub`` accessor.
         :param client: The client used to poll for the status of the operation.
@@ -158,7 +158,7 @@ class Operation(object):
         :param caller_metadata: caller-assigned metadata about the operation
 
         :rtype: :class:`Operation`
-        :returns: new instance, with attributes based on the protobuf.
+        :returns: new instance, with attributes based on the r_protobuf.
         """
         result = cls(operation_pb.name, client, **caller_metadata)
         result._update_state(operation_pb)
@@ -179,7 +179,7 @@ class Operation(object):
         :param caller_metadata: caller-assigned metadata about the operation
 
         :rtype: :class:`Operation`
-        :returns: new instance, with attributes based on the protobuf.
+        :returns: new instance, with attributes based on the r_protobuf.
         """
         operation_pb = json_format.ParseDict(operation, operations_pb2.Operation())
         result = cls(operation_pb.name, client, **caller_metadata)
@@ -235,7 +235,7 @@ class Operation(object):
 
         :type operation_pb:
             :class:`~google.longrunning.operations_pb2.Operation`
-        :param operation_pb: Protobuf to be parsed.
+        :param operation_pb: r_protobuf to be parsed.
         """
         if operation_pb.done:
             self._complete = True

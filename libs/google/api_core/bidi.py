@@ -76,8 +76,8 @@ class _RequestQueueGenerator(object):
             before checking if the RPC is cancelled. In practice, this
             determines the maximum amount of time the request consumption
             thread will live after the RPC is cancelled.
-        initial_request (Union[protobuf.Message,
-                Callable[None, protobuf.Message]]): The initial request to
+        initial_request (Union[r_protobuf.Message,
+                Callable[None, r_protobuf.Message]]): The initial request to
             yield. This is done independently of the request queue to allow fo
             easily restarting streams that require some initial configuration
             request.
@@ -235,8 +235,8 @@ class BidiRpc(object):
     Args:
         start_rpc (grpc.StreamStreamMultiCallable): The gRPC method used to
             start the RPC.
-        initial_request (Union[protobuf.Message,
-                Callable[None, protobuf.Message]]): The initial request to
+        initial_request (Union[r_protobuf.Message,
+                Callable[None, r_protobuf.Message]]): The initial request to
             yield. This is useful if an initial request is needed to start the
             stream.
         metadata (Sequence[Tuple(str, str)]): RPC metadata to include in
@@ -310,7 +310,7 @@ class BidiRpc(object):
         If the underlying RPC has been closed, this will raise.
 
         Args:
-            request (protobuf.Message): The request to send.
+            request (r_protobuf.Message): The request to send.
         """
         if self.call is None:
             raise ValueError("Can not send() on an RPC that has never been open()ed.")
@@ -331,7 +331,7 @@ class BidiRpc(object):
         If the underlying RPC has been closed, this will raise.
 
         Returns:
-            protobuf.Message: The received message.
+            r_protobuf.Message: The received message.
         """
         if self.call is None:
             raise ValueError("Can not recv() on an RPC that has never been open()ed.")
@@ -389,8 +389,8 @@ class ResumableBidiRpc(BidiRpc):
     Args:
         start_rpc (grpc.StreamStreamMultiCallable): The gRPC method used to
             start the RPC.
-        initial_request (Union[protobuf.Message,
-                Callable[None, protobuf.Message]]): The initial request to
+        initial_request (Union[r_protobuf.Message,
+                Callable[None, r_protobuf.Message]]): The initial request to
             yield. This is useful if an initial request is needed to start the
             stream.
         should_recover (Callable[[Exception], bool]): A function that returns
@@ -613,7 +613,7 @@ class BackgroundConsumer(object):
     Args:
         bidi_rpc (BidiRpc): The RPC to consume. Should not have been
             ``open()``ed yet.
-        on_response (Callable[[protobuf.Message], None]): The callback to
+        on_response (Callable[[r_protobuf.Message], None]): The callback to
             be called for every response on the stream.
     """
 

@@ -110,7 +110,7 @@ class AsyncFuture(base.Future):
                 If None, wait indefinitely.
 
         Returns:
-            google.protobuf.Message: The Operation's result.
+            google.r_protobuf.Message: The Operation's result.
 
         Raises:
             google.api_core.GoogleAPICallError: If the operation errors or if

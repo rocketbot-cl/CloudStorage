@@ -87,7 +87,7 @@ class _StreamingResponseIterator(grpc.Call):
         """Get the next response from the stream.
 
         Returns:
-            protobuf.Message: A single response from the stream.
+            r_protobuf.Message: A single response from the stream.
         """
         try:
             if hasattr(self, "_stored_first_result"):
@@ -302,18 +302,18 @@ class _CallableStub(object):
         self._method = method
         self._channel = channel
         self.response = None
-        """Union[protobuf.Message, Callable[protobuf.Message], exception]:
+        """Union[r_protobuf.Message, Callable[r_protobuf.Message], exception]:
         The response to give when invoking this callable. If this is a
-        callable, it will be invoked with the request protobuf. If it's an
+        callable, it will be invoked with the request r_protobuf. If it's an
         exception, the exception will be raised when this is invoked.
         """
         self.responses = None
         """Iterator[
-            Union[protobuf.Message, Callable[protobuf.Message], exception]]:
+            Union[r_protobuf.Message, Callable[r_protobuf.Message], exception]]:
         An iterator of responses. If specified, self.response will be populated
         on each invocation by calling ``next(self.responses)``."""
         self.requests = []
-        """List[protobuf.Message]: All requests sent to this callable."""
+        """List[r_protobuf.Message]: All requests sent to this callable."""
         self.calls = []
         """List[Tuple]: All invocations of this callable. Each tuple is the
         request, timeout, metadata, and credentials."""
@@ -419,7 +419,7 @@ class ChannelStub(grpc.Channel):
 
     def __init__(self, responses=[]):
         self.requests = []
-        """Sequence[Tuple[str, protobuf.Message]]: A list of all requests made
+        """Sequence[Tuple[str, r_protobuf.Message]]: A list of all requests made
         on this channel in order. The tuple is of method name, request
         message."""
         self._method_stubs = {}

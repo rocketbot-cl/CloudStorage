@@ -40,7 +40,7 @@ import functools
 import threading
 
 from google.api_core import exceptions
-from google.api_core import protobuf_helpers
+from google.api_core import r_protobuf_helpers
 from google.api_core.future import async_future
 from google.longrunning import operations_pb2
 from google.rpc import code_pb2
@@ -56,9 +56,9 @@ class AsyncOperation(async_future.AsyncFuture):
             returns the latest state of the operation.
         cancel (Callable[[], None]): A callable that tries to cancel
             the operation.
-        result_type (func:`type`): The protobuf type for the operation's
+        result_type (func:`type`): The r_protobuf type for the operation's
             result.
-        metadata_type (func:`type`): The protobuf type for the operation's
+        metadata_type (func:`type`): The r_protobuf type for the operation's
             metadata.
         retry (google.api_core.retry.Retry): The retry configuration used
             when polling. This can be used to control how often :meth:`done`
@@ -92,11 +92,11 @@ class AsyncOperation(async_future.AsyncFuture):
 
     @property
     def metadata(self):
-        """google.protobuf.Message: the current operation metadata."""
+        """google.r_protobuf.Message: the current operation metadata."""
         if not self._operation.HasField("metadata"):
             return None
 
-        return protobuf_helpers.from_any_pb(
+        return r_protobuf_helpers.from_any_pb(
             self._metadata_type, self._operation.metadata
         )
 
@@ -108,7 +108,7 @@ class AsyncOperation(async_future.AsyncFuture):
             payload (bytes): A serialized operation protocol buffer.
 
         Returns:
-            ~.operations_pb2.Operation: An Operation protobuf object.
+            ~.operations_pb2.Operation: An Operation r_protobuf object.
         """
         return operations_pb2.Operation.FromString(payload)
 
@@ -124,7 +124,7 @@ class AsyncOperation(async_future.AsyncFuture):
                 return
 
             if self._operation.HasField("response"):
-                response = protobuf_helpers.from_any_pb(
+                response = r_protobuf_helpers.from_any_pb(
                     self._result_type, self._operation.response
                 )
                 self.set_result(response)
@@ -203,7 +203,7 @@ def from_gapic(operation, operations_client, result_type, grpc_metadata=None, **
         operation (google.longrunning.operations_pb2.Operation): The operation.
         operations_client (google.api_core.operations_v1.OperationsClient):
             The operations client.
-        result_type (:func:`type`): The protobuf result type.
+        result_type (:func:`type`): The r_protobuf result type.
         grpc_metadata (Optional[List[Tuple[str, str]]]): Additional metadata to pass
             to the rpc.
         kwargs: Keyword args passed into the :class:`Operation` constructor.

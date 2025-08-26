@@ -96,7 +96,7 @@ class Page(object):
             Callable to convert an item from the type in the raw API response
             into the native object. Will be called with the iterator and a
             single item.
-        raw_page Optional[google.protobuf.message.Message]:
+        raw_page Optional[google.r_protobuf.message.Message]:
             The raw page response.
     """
 
@@ -110,7 +110,7 @@ class Page(object):
 
     @property
     def raw_page(self):
-        """google.protobuf.message.Message"""
+        """google.r_protobuf.message.Message"""
         return self._raw_page
 
     @property
@@ -434,7 +434,7 @@ class _GAXIterator(Iterator):
         page_iter (google.gax.PageIterator): A GAX page iterator to be wrapped
             to conform to the :class:`Iterator` interface.
         item_to_value (Callable[Iterator, Any]): Callable to convert an item
-            from the the protobuf response into a native object. Will
+            from the the r_protobuf response into a native object. Will
             be called with the iterator and a single item.
         max_results (int): The maximum number of results to fetch.
 
@@ -478,9 +478,9 @@ class GRPCIterator(Iterator):
     Args:
         client (google.cloud.client.Client): The API client. This unused by
             this class, but kept to satisfy the :class:`Iterator` interface.
-        method (Callable[protobuf.Message]): A bound gRPC method that should
+        method (Callable[r_protobuf.Message]): A bound gRPC method that should
             take a single message for the request.
-        request (protobuf.Message): The request message.
+        request (r_protobuf.Message): The request message.
         items_field (str): The field in the response message that has the
             items for the page.
         item_to_value (Callable[GRPCIterator, Any]): Callable to convert an
