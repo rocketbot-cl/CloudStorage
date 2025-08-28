@@ -20,7 +20,7 @@ import re
 
 import pytz
 
-from google.protobuf import timestamp_pb2
+from google.r_protobuf import timestamp_pb2
 
 
 _UTC_EPOCH = datetime.datetime.utcfromtimestamp(0).replace(tzinfo=pytz.utc)
@@ -263,7 +263,7 @@ class DatetimeWithNanoseconds(datetime.datetime):
         """Return a timestamp message.
 
         Returns:
-            (:class:`~google.protobuf.timestamp_pb2.Timestamp`): Timestamp message
+            (:class:`~google.r_protobuf.timestamp_pb2.Timestamp`): Timestamp message
         """
         inst = self if self.tzinfo is not None else self.replace(tzinfo=pytz.UTC)
         delta = inst - _UTC_EPOCH
@@ -276,7 +276,7 @@ class DatetimeWithNanoseconds(datetime.datetime):
         """Parse RFC3339-compliant timestamp, preserving nanoseconds.
 
         Args:
-            stamp (:class:`~google.protobuf.timestamp_pb2.Timestamp`): timestamp message
+            stamp (:class:`~google.r_protobuf.timestamp_pb2.Timestamp`): timestamp message
 
         Returns:
             :class:`DatetimeWithNanoseconds`:

@@ -1,12 +1,12 @@
 Metadata-Version: 2.0
-Name: protobuf
+Name: r_protobuf
 Version: 3.14.0
 Summary: Protocol Buffers
 Home-page: https://developers.google.com/protocol-buffers/
-Author: protobuf@googlegroups.com
-Author-email: protobuf@googlegroups.com
+Author: r_protobuf@googlegroups.com
+Author-email: r_protobuf@googlegroups.com
 License: 3-Clause BSD License
-Download-URL: https://github.com/protocolbuffers/protobuf/releases
+Download-URL: https://github.com/protocolbuffers/r_protobuf/releases
 Platform: UNKNOWN
 Classifier: Programming Language :: Python
 Classifier: Programming Language :: Python :: 2

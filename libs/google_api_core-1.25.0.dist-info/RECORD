@@ -14,7 +14,7 @@ google/api_core/__pycache__/operation_async.cpython-36.pyc,,
 google/api_core/__pycache__/page_iterator.cpython-36.pyc,,
 google/api_core/__pycache__/page_iterator_async.cpython-36.pyc,,
 google/api_core/__pycache__/path_template.cpython-36.pyc,,
-google/api_core/__pycache__/protobuf_helpers.cpython-36.pyc,,
+google/api_core/__pycache__/r_protobuf_helpers.cpython-36.pyc,,
 google/api_core/__pycache__/retry.cpython-36.pyc,,
 google/api_core/__pycache__/retry_async.cpython-36.pyc,,
 google/api_core/__pycache__/timeout.cpython-36.pyc,,
@@ -65,7 +65,7 @@ google/api_core/operations_v1/operations_client_config.py,sha256=T5bHWWHGZ2GZr2t
 google/api_core/page_iterator.py,sha256=mZLvhZ8mXGxwExITOFe-dmhCejkYrD3Oyb49nebA9Dk,19811
 google/api_core/page_iterator_async.py,sha256=CTWcV_GflnTozu0D09ynqjsr8VYOGS5c0kF7510aryk,10066
 google/api_core/path_template.py,sha256=rBhDOnyonbodMgvY2XRHs56UJGa1HTLPJG_UXUxVYdg,6549
-google/api_core/protobuf_helpers.py,sha256=GEj2LFQspH-mDFMx666c7P8Gx9ZuIepQxPvwHLeUzDI,12140
+google/api_core/r_protobuf_helpers.py,sha256=GEj2LFQspH-mDFMx666c7P8Gx9ZuIepQxPvwHLeUzDI,12140
 google/api_core/retry.py,sha256=Z5W0sWUZ5_TBqTkOrYuYi1-c_pjbT4NwJh-rv36r6uU,12561
 google/api_core/retry_async.py,sha256=BACfyYCL5pn7bcNfT5ZG4v4fEwx9avqicoBd11xIixA,10401
 google/api_core/timeout.py,sha256=tiyTh0oeq_EoCHtmwtrMEZrW2jGRvpSEo0jESfpjpKk,7411

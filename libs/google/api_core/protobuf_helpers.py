@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Helpers for :mod:`protobuf`."""
+"""Helpers for :mod:`r_protobuf`."""
 
 import collections
 import copy
 import inspect
 
-from google.protobuf import field_mask_pb2
-from google.protobuf import message
-from google.protobuf import wrappers_pb2
+from google.r_protobuf import field_mask_pb2
+from google.r_protobuf import message
+from google.r_protobuf import wrappers_pb2
 
 try:
     from collections import abc as collections_abc
@@ -43,12 +43,12 @@ _WRAPPER_TYPES = (
 
 
 def from_any_pb(pb_type, any_pb):
-    """Converts an ``Any`` protobuf to the specified message type.
+    """Converts an ``Any`` r_protobuf to the specified message type.
 
     Args:
         pb_type (type): the type of the message that any_pb stores an instance
             of.
-        any_pb (google.protobuf.any_pb2.Any): the object to be converted.
+        any_pb (google.r_protobuf.any_pb2.Any): the object to be converted.
 
     Returns:
         pb_type: An instance of the pb_type message.
@@ -64,7 +64,7 @@ def from_any_pb(pb_type, any_pb):
     else:
         msg_pb = msg
 
-    # Unpack the Any object and populate the protobuf message instance.
+    # Unpack the Any object and populate the r_protobuf message instance.
     if not any_pb.Unpack(msg_pb):
         raise TypeError(
             "Could not convert {} to {}".format(
@@ -99,14 +99,14 @@ def check_oneof(**kwargs):
 
 
 def get_messages(module):
-    """Discovers all protobuf Message classes in a given import module.
+    """Discovers all r_protobuf Message classes in a given import module.
 
     Args:
         module (module): A Python module; :func:`dir` will be run against this
             module to find Message subclasses.
 
     Returns:
-        dict[str, google.protobuf.message.Message]: A dictionary with the
+        dict[str, google.r_protobuf.message.Message]: A dictionary with the
             Message class names as keys, and the Message subclasses themselves
             as values.
     """
@@ -150,15 +150,15 @@ def _resolve_subkeys(key, separator="."):
 
 
 def get(msg_or_dict, key, default=_SENTINEL):
-    """Retrieve a key's value from a protobuf Message or dictionary.
+    """Retrieve a key's value from a r_protobuf Message or dictionary.
 
     Args:
-        mdg_or_dict (Union[~google.protobuf.message.Message, Mapping]): the
+        mdg_or_dict (Union[~google.r_protobuf.message.Message, Mapping]): the
             object.
         key (str): The key to retrieve from the object.
         default (Any): If the key is not present on the object, and a default
             is set, returns that default instead. A type-appropriate falsy
-            default is generally recommended, as protobuf messages almost
+            default is generally recommended, as r_protobuf messages almost
             always have default values for unset values and it is not always
             possible to tell the difference between a falsy value and an
             unset one. If no default is set then :class:`KeyError` will be
@@ -183,7 +183,7 @@ def get(msg_or_dict, key, default=_SENTINEL):
         answer = msg_or_dict.get(key, default)
     else:
         raise TypeError(
-            "get() expected a dict or protobuf message, got {!r}.".format(
+            "get() expected a dict or r_protobuf message, got {!r}.".format(
                 type(msg_or_dict)
             )
         )
@@ -201,11 +201,11 @@ def get(msg_or_dict, key, default=_SENTINEL):
 
 
 def _set_field_on_message(msg, key, value):
-    """Set helper for protobuf Messages."""
+    """Set helper for r_protobuf Messages."""
     # Attempt to set the value on the types of objects we know how to deal
     # with.
     if isinstance(value, (collections_abc.MutableSequence, tuple)):
-        # Clear the existing repeated protobuf message of any elements
+        # Clear the existing repeated r_protobuf message of any elements
         # currently inside it.
         while getattr(msg, key):
             getattr(msg, key).pop()
@@ -215,11 +215,11 @@ def _set_field_on_message(msg, key, value):
             if isinstance(item, collections_abc.Mapping):
                 getattr(msg, key).add(**item)
             else:
-                # protobuf's RepeatedCompositeContainer doesn't support
+                # r_protobuf's RepeatedCompositeContainer doesn't support
                 # append.
                 getattr(msg, key).extend([item])
     elif isinstance(value, collections_abc.Mapping):
-        # Assign the dictionary values to the protobuf message.
+        # Assign the dictionary values to the r_protobuf message.
         for item_key, item_value in value.items():
             set(getattr(msg, key), item_key, item_value)
     elif isinstance(value, message.Message):
@@ -229,10 +229,10 @@ def _set_field_on_message(msg, key, value):
 
 
 def set(msg_or_dict, key, value):
-    """Set a key's value on a protobuf Message or dictionary.
+    """Set a key's value on a r_protobuf Message or dictionary.
 
     Args:
-        msg_or_dict (Union[~google.protobuf.message.Message, Mapping]): the
+        msg_or_dict (Union[~google.r_protobuf.message.Message, Mapping]): the
             object.
         key (str): The key to set.
         value (Any): The value to set.
@@ -243,7 +243,7 @@ def set(msg_or_dict, key, value):
     # Sanity check: Is our target object valid?
     if not isinstance(msg_or_dict, (collections_abc.MutableMapping, message.Message)):
         raise TypeError(
-            "set() expected a dict or protobuf message, got {!r}.".format(
+            "set() expected a dict or r_protobuf message, got {!r}.".format(
                 type(msg_or_dict)
             )
         )
@@ -266,16 +266,16 @@ def set(msg_or_dict, key, value):
 
 
 def setdefault(msg_or_dict, key, value):
-    """Set the key on a protobuf Message or dictionary to a given value if the
+    """Set the key on a r_protobuf Message or dictionary to a given value if the
     current value is falsy.
 
-    Because protobuf Messages do not distinguish between unset values and
+    Because r_protobuf Messages do not distinguish between unset values and
     falsy ones particularly well (by design), this method treats any falsy
     value (e.g. 0, empty list) as a target to be overwritten, on both Messages
     and dictionaries.
 
     Args:
-        msg_or_dict (Union[~google.protobuf.message.Message, Mapping]): the
+        msg_or_dict (Union[~google.r_protobuf.message.Message, Mapping]): the
             object.
         key (str): The key on the object in question.
         value (Any): The value to set.
@@ -291,15 +291,15 @@ def field_mask(original, modified):
     """Create a field mask by comparing two messages.
 
     Args:
-        original (~google.protobuf.message.Message): the original message.
+        original (~google.r_protobuf.message.Message): the original message.
             If set to None, this field will be interpretted as an empty
             message.
-        modified (~google.protobuf.message.Message): the modified message.
+        modified (~google.r_protobuf.message.Message): the modified message.
             If set to None, this field will be interpretted as an empty
             message.
 
     Returns:
-        google.protobuf.field_mask_pb2.FieldMask: field mask that contains
+        google.r_protobuf.field_mask_pb2.FieldMask: field mask that contains
         the list of field names that have different values between the two
         messages. If the messages are equivalent, then the field mask is empty.
 

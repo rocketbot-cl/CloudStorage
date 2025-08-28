@@ -201,9 +201,9 @@ class AsyncGRPCIterator(AsyncIterator):
     Args:
         client (google.cloud.client.Client): The API client. This unused by
             this class, but kept to satisfy the :class:`Iterator` interface.
-        method (Callable[protobuf.Message]): A bound gRPC method that should
+        method (Callable[r_protobuf.Message]): A bound gRPC method that should
             take a single message for the request.
-        request (protobuf.Message): The request message.
+        request (r_protobuf.Message): The request message.
         items_field (str): The field in the response message that has the
             items for the page.
         item_to_value (Callable[GRPCIterator, Any]): Callable to convert an
