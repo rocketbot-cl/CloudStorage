@@ -63,7 +63,6 @@ if module == "uploadFile":
     try:
         if file_name and not destination_blob_name.endswith(file_name):
             destination_blob_name += file_name
-        print(destination_blob_name)
         """Uploads a file to the bucket."""
         # bucket_name = "your-bucket-name"
         # source_file_name = "local/path/to/file"
@@ -74,11 +73,6 @@ if module == "uploadFile":
         blob = bucket.blob(destination_blob_name)
         blob.upload_from_filename(source_file_name, timeout=int(timeout))
         blob.chunk_size = 10 * 1024 * 1024
-        print(
-            "File {} uploaded to {}.".format(
-                source_file_name, destination_blob_name
-            )
-        )
 
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
